@@ -1,0 +1,16 @@
+    {
+	"name" : "Data::Tree",
+	"license" : "Artistic-2.0",
+	"version" : "0.1",
+	"tags" : [ ],
+	"description" : "rooted-tree data structure and utils for Raku",
+	"provides" : {
+	    "Data::Tree": "lib/Data/Tree.rakumod"
+	},
+        "auth" : "zef:stuart-little",
+	"authors" : [ "stuart-little" ],
+	"perl" : "6.*",
+	"depends" : [ ],
+	"source-type" : "git",
+	"source-url" : ""
+}

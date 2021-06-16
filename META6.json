@@ -9,8 +9,8 @@
 	},
         "auth" : "zef:stuart-little",
 	"authors" : [ "stuart-little" ],
-	"perl" : "6.*",
+	"perl" : "6.d",
 	"depends" : [ ],
 	"source-type" : "git",
-	"source-url" : ""
+	"source-url" : "https://github.com/stuart-little/raku-data-tree.git"
 }

@@ -89,6 +89,23 @@ Or compute the sum of its vertex values, by folding it with a summation "folder"
 
 (sanity check: yes, 1+2+3+4+5+6+7 equals 7 * 8 / 2 = 28). 
 
+There's also a `map` method that both the classes overload, which does what (I think) you think it should. Using that same `&f` I have been in this running example:
+
+    > unfoldTree(&f,1).map(* ** 2).&drawTree
+    1
+    |
+    +-4
+    | |
+    | +-16
+    | |
+    | `-25
+    |
+    `-9
+      |
+      +-36
+      |
+      `-49
+
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from **Haskell** or **Perl**.
 
 Creation
@@ -153,7 +170,7 @@ foldTree
 ```raku
 sub flatten(
     Tree::RTree $t
-) returns Mu
+) returns Array
 ```
 
 flatten
@@ -165,7 +182,7 @@ flatten
 ```raku
 sub levels(
     Tree::RTree $t
-) returns Mu
+) returns Array
 ```
 
 levels
@@ -180,7 +197,7 @@ Display
 ```raku
 sub drawTree(
     Tree::RTree $t
-) returns Mu
+) returns Str
 ```
 
 drawTree
@@ -192,7 +209,7 @@ drawTree
 ```raku
 sub drawTreeLines(
     Tree::RTree $t
-) returns Mu
+) returns Array
 ```
 
 drawTreeLines

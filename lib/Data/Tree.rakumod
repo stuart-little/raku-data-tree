@@ -10,11 +10,19 @@ A B<Raku> (rooted) tree data structure modelled on B<Haskell>'s L<Data.Tree|http
 class RTree is export {
     has $.data is rw;
     has RTree @.children is rw = [];
+
+    multi method map(&f --> RTree) {
+	return RTree.new(data => f($.data), children => $.children.map({ $_.map(&f) }).Array);
+    }
 }
 
 #| Forest: container class for an array of trees
 class Forest is export {
     has RTree @.trees is rw;
+
+    multi method map(&f --> Forest) {
+	return Forest.new(trees => $.trees.map({ $_.map(&f) }).Array);
+    }
 }
 
 =begin pod
@@ -102,6 +110,25 @@ Or compute the sum of its vertex values, by folding it with a summation "folder"
 
 (sanity check: yes, 1+2+3+4+5+6+7 equals 7 * 8 / 2 = 28). 
 
+There's also a C<map> method that both the classes overload, which does what (I think) you think it should. Using that same C<&f> I have been in this running example:
+
+=begin code
+> unfoldTree(&f,1).map(* ** 2).&drawTree
+1
+|
++-4
+| |
+| +-16
+| |
+| `-25
+|
+`-9
+  |
+  +-36
+  |
+  `-49  
+=end code
+
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from B<Haskell> or B<Perl>.
 
 =end pod
@@ -157,7 +184,7 @@ L<original inspiration|https://hackage.haskell.org/package/containers-0.6.4.1/do
 =end pod
 
 #| flatten
-sub flatten(RTree $t) is export {
+sub flatten(RTree $t --> Array) is export {
     return [$t.data, |$t.children.map({ $_.&flatten }).map(|*) ]
 }
 
@@ -166,7 +193,7 @@ L<original inspiration|https://hackage.haskell.org/package/containers-0.6.4.1/do
 =end pod
 
 #| levels
-sub levels(RTree $t) is export {
+sub levels(RTree $t --> Array) is export {
     (! $t.data) && return [];
     return [[$t.data], |roundrobin($t.children.map({ $_.&levels })).map(*.map(|*).Array).Array]
 }
@@ -180,7 +207,7 @@ L<original inspiration|https://hackage.haskell.org/package/containers-0.6.4.1/do
 =end pod
 
 #| drawTree
-sub drawTree(RTree $t) is export {
+sub drawTree(RTree $t --> Str) is export {
     return $t.&drawTreeLines.join("\n");
 }
 
@@ -189,7 +216,7 @@ L<original inspiration|https://hackage.haskell.org/package/containers-0.6.4.1/do
 =end pod
 
 #| drawTreeLines
-sub drawTreeLines(RTree $t) {
+sub drawTreeLines(RTree $t --> Array) {
     return [|$t.data.Str.lines, |drawSubTrees($t.children)]
 }
 
@@ -212,7 +239,7 @@ L<original inspiration|https://hackage.haskell.org/package/containers-0.6.4.1/do
 
 #| drawForest
 sub drawForest(Forest $f --> Str) is export {
-    return $f.trees.map({ .&drawTree }).join("\n");
+    return $f.trees.map({ .&drawTree }).join("\n\n");
 }
 
 =begin pod

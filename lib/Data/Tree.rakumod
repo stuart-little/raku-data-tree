@@ -16,7 +16,7 @@ class RTree is export {
     }
 
     multi method grep(&f) {
-	return;
+	return self.&grep(&f);
     }
 }
 
@@ -144,6 +144,12 @@ Finally, here is a list of exported (or exportable) functions, with links to the
 =begin pod
 =head2 Creation
 =end pod
+
+my multi method grep(RTree:D $t: &f --> Forest) {
+    (! $t.&f) && return Forest.new(trees => $t.children).grep(&f);
+    my $tree = RTree.new(data => $t.data, children => $t.children.map({ |$_.grep(&f).trees }).Array);
+    return Forest.new(trees => [$tree,]);
+}
 
 #| lol2tree
 sub lol2tree(@a --> RTree) is export {

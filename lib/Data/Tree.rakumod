@@ -14,14 +14,22 @@ class RTree is export {
     multi method map(&f --> RTree) {
 	return RTree.new(data => f($.data), children => $.children.map({ $_.map(&f) }).Array);
     }
+
+    multi method grep(&f) {
+	return;
+    }
 }
 
 #| Forest: container class for an array of trees
 class Forest is export {
-    has RTree @.trees is rw;
+    has RTree @.trees is rw = [];
 
     multi method map(&f --> Forest) {
 	return Forest.new(trees => $.trees.map({ $_.map(&f) }).Array);
+    }
+
+    multi method grep(&f --> Forest) {
+	return Forest.new(trees => $.trees.map({ |$_.grep(&f).trees }).Array);
     }
 }
 

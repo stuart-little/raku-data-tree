@@ -157,6 +157,12 @@ C<grep> always returns a C<Forest>, hence the need to call C<&drawForest> on the
 
 What happened there is that 
 
+=item The predicate I passed identified via a L<junction|https://docs.raku.org/type/Junction> which nodes have their C<data> attrebute equal to either 2 or 3;
+
+=item Those nodes were eliminated;
+
+=item the remaining nodes got stitched together into a forest via the closest-ancestor relationship.
+
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from B<Haskell> or B<Perl>.
 
 =end pod

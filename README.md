@@ -106,6 +106,34 @@ There's also a `map` method that both the classes overload, which does what (I t
       |
       `-49
 
+Ditto for `grep`:
+
+    > unfoldTree(&f,1).grep({ $_.data != 2|3 }).&drawForest
+
+    1
+    |
+    +-4
+    |
+    +-5
+    |
+    +-6
+    |
+    `-7
+
+`grep` always returns a `Forest`, hence the need to call `&drawForest` on the result.
+
+What happened there is that 
+
+  * The predicate I passed identified via a [junction](https://docs.raku.org/type/Junction) which nodes have their `data` attrebute equal to either 2 or 3;
+
+  * Those nodes were eliminated;
+
+  * The remaining nodes got stitched together into a forest (consisting of a single tree in this case) via the closest-ancestor relationship.
+
+Whether this is what `grep` *should* be doing to a tree is debatable: it could, for instance, simply throw out the relevant nodes and leave it at that, without re-attaching (hence producing a bunch of isolated nodes in this case).
+
+In any case, this is the built-in behavior at present.
+
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from **Haskell** or **Perl**.
 
 Creation

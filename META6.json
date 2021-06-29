@@ -1,7 +1,7 @@
     {
 	"name" : "Data::Tree",
 	"license" : "Artistic-2.0",
-	"version" : "0.2",
+	"version" : "0.3",
 	"tags" : [ ],
 	"description" : "rooted-tree data structure and utils for Raku",
 	"provides" : {

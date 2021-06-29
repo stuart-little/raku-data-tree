@@ -161,8 +161,14 @@ What happened there is that
 
 =item Those nodes were eliminated;
 
-=item the remaining nodes got stitched together into a forest via the closest-ancestor relationship.
+=item The remaining nodes got stitched together into a forest (consisting of a single tree in this case) via the closest-ancestor relationship.
 
+Whether this is what C<grep> I<should> be doing to a tree is debatable: it could, for instance, simply throw out the relevant nodes and leave it at that, without re-attaching (hence producing a bunch of isolated nodes in this case).
+
+In any case, this is the built-in behavior at present.
+=end pod
+
+=begin pod
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from B<Haskell> or B<Perl>.
 
 =end pod

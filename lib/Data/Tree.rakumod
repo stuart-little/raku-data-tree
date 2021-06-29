@@ -137,6 +137,26 @@ There's also a C<map> method that both the classes overload, which does what (I 
   `-49  
 =end code
 
+Ditto for C<grep>:
+
+=begin code
+> unfoldTree(&f,1).grep({ $_.data != 2|3 }).&drawForest
+
+1
+|
++-4
+|
++-5
+|
++-6
+|
+`-7
+=end code
+
+C<grep> always returns a C<Forest>, hence the need to call C<&drawForest> on the result.
+
+What happened there is that 
+
 Finally, here is a list of exported (or exportable) functions, with links to their cousins' documentation from B<Haskell> or B<Perl>.
 
 =end pod

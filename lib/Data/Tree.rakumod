@@ -141,7 +141,6 @@ Ditto for C<grep>:
 
 =begin code
 > unfoldTree(&f,1).grep({ $_.data != 2|3 }).&drawForest
-
 1
 |
 +-4

@@ -109,7 +109,6 @@ There's also a `map` method that both the classes overload, which does what (I t
 Ditto for `grep`:
 
     > unfoldTree(&f,1).grep({ $_.data != 2|3 }).&drawForest
-
     1
     |
     +-4
